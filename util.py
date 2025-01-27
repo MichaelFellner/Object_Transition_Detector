@@ -2,11 +2,23 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-def detect_objects(frame,min_size= -1,display=True):
+def imshow(image):
+    plt.imshow(image, cmap='gray', vmin=0, vmax=255)
+    plt.show()
+
+#function to compare two areas 
+def area_compare(area_1, area_2):
+    if area_1 == area_2:
+        return 1
+    elif area_1 > area_2:
+        return area_1/area_2
+    else:
+        return area_2/area_1
+
+def detect_objects(frame,min_size= -1,display=False):
     _, binary = cv2.threshold(frame, 0, 255, cv2.THRESH_BINARY)
     # Find contours
     contours, _ = cv2.findContours(binary, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-
     # Minimum size for distinct objects
 
     # List to store cropped objects
@@ -23,6 +35,9 @@ def detect_objects(frame,min_size= -1,display=True):
             cropped_object = frame[y:y+h, x:x+w]
             #if cropped object not all black
             if np.any(cropped_object):
+                #add 1 pixel padding of mean value to cropped object
+                mean = np.mean(cropped_object)
+                #cropped_object = cv2.copyMakeBorder(cropped_object, 1, 1, 1, 1, cv2.BORDER_CONSTANT, value=mean)
                 cropped_objects.append((cropped_object, (x, y, w, h)))
     if display:
         # Display the result with bounding boxes
@@ -30,6 +45,8 @@ def detect_objects(frame,min_size= -1,display=True):
         plt.imshow(output_image)
         plt.axis("off")
         plt.show()
+    #add padding to each cropped object
+    
     return cropped_objects
 
 def visualize_transitions(frame1, frame2, transitions):
