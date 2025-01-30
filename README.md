@@ -13,11 +13,11 @@ inductive biases humans hold about object tracking. For example
     - (A second inductive bias here is that transitioning is a 1 to 1 function).
 
 2. **Objects Do Not Move Too Quickly**
- -Only search for candidate transitions within a window of the first object (do not assume objects teleport, a more likely explanation of a similar object appearing in a 
+    - Only search for candidate transitions within a window of the first object (do not assume objects teleport, a more likely explanation of a similar object appearing in a 
  new far away location is that it is a new distinct object).
 
 3. **If There Exists an Object in the Same Exact Location in the Next Frame, Lower the Similarity Threshold**
--It is more likely that the same object is changing shape or color than a different object ending up in the same exact spot as the initial object in the first frame. 
+    - It is more likely that the same object is changing shape or color than a different object ending up in the same exact spot as the initial object in the first frame. 
 
 There are of course more inductive biases, different ones that can be used, and more sophisticated ways of implementing inductive biases (i.e. wheighted approaches), 
 but making them explicit offers and interpretable approach that can also operate quickly and reflect psychology experiments.
@@ -39,4 +39,14 @@ but making them explicit offers and interpretable approach that can also operate
    - Rank candidate matches based on distance and IoU score.  
    - Apply inductive biases to break 1 to N matches.
    - Ensure final match dictionary is 1 to 1
+  
+## Example Current State of Transition Detector on one Pair of Frames
+(The third pair shows one of the remaining challenges for detecting transitions).
+![Jan_30_Transitions](https://github.com/user-attachments/assets/3b679d6e-00d3-4f5d-8ab7-149be7250961)
+![t5](https://github.com/user-attachments/assets/e9ae3934-11e1-4697-b97e-d7df4a5994f3)
+![t4](https://github.com/user-attachments/assets/8e30be2f-87c0-4b9a-b452-cace2740b286)
+![t3](https://github.com/user-attachments/assets/1d91a500-9caa-4f69-93a2-c1dbf45fa39d)
+![t2](https://github.com/user-attachments/assets/440a6707-518a-4034-ae32-c8e3c26a1490)
+
+
 
