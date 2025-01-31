@@ -21,6 +21,9 @@ inductive biases humans hold about object tracking. For example
 
 There are of course more inductive biases, different ones that can be used, and more sophisticated ways of implementing inductive biases (i.e. wheighted approaches), 
 but making them explicit offers and interpretable approach that can also operate quickly and reflect psychology experiments.
+## Potential Use Case
+By creating a dataset of object transitions, it can be possible to use such a dataset as training data where a CNN can learn to predict the transitions of objects given an object image. Such a CNN can then be used
+as a transition function by scanning each object in a frame rather than an entire frame itself. The space of possible transitions also decreases in this way allowing algorithms like value iteration or reinforecement learning algorithms to be more effective.
 
 ## Approach
 
